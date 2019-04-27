@@ -1,4 +1,4 @@
-# NCU Net [![](https://img.shields.io/badge/Standalone-blue.svg)](https://github.com/kidonng/cherry#user-content-ncu-net)
+# NCU Net [![](https://img.shields.io/badge/Standalone-blue.svg)](https://github.com/kidonng/cherry#user-content-ncu-net-)
 
 Auto login NCU Campus Network Access Authentication System.
 

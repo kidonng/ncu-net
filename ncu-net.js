@@ -1,10 +1,10 @@
 const got = require('got')
-const chalk = require('chalk')
 const Hashes = require('./lib/hashes.min')
-const xEncode = require('./lib/xEncode')
 
 const log = (color, msg) =>
-  console.log(chalk[color](`${new Date().toTimeString().slice(0, 8)} ${msg}`))
+  console.log(
+    require('chalk')[color](`${new Date().toTimeString().slice(0, 8)} ${msg}`)
+  )
 const callback = data => data
 
 const config = {
@@ -36,7 +36,7 @@ const config = {
     ).challenge
     const md5 = new Hashes.MD5().hex_hmac(token, config.password)
     const info = `{SRBX1}${new Hashes.Base64().encode(
-      xEncode(
+      require('./lib/xEncode')(
         JSON.stringify({
           username: config.username,
           password: config.password,
