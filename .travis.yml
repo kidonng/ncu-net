@@ -1,3 +1,3 @@
 # For Greenkeeper to work
-
+language: node_js
 install: true
