@@ -9,5 +9,5 @@ Note: Currently only support `NCU-5G/NCU-2.4G` login (no logout).
 ## Usage
 
 1. Run `npm i` to setup.
-2. [Config username, password & more](ncu-net.js#L1-L7).
+2. [Config username, password & more](ncu-net.js#L1-L21).
 3. Run `npm start/stop` to start/stop the daemon.
