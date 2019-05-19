@@ -9,7 +9,7 @@
     "got": "9.6.0"
   },
   "devDependencies": {
-    "prettier": "1.17.0"
+    "prettier": "1.17.1"
   },
   "prettier": {
     "semi": false,
