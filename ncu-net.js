@@ -1,20 +1,34 @@
 const config = {
+  // Available languages: en - English, zh - Simplified Chinese
+  lang: 'zh',
+
+  // NCU-5G/NCU-2.4G account
   NCUXG: {
-    studentNo: '',
+    username: '',
 
     // ISPs: cmcc - 移动, unicom - 联通, ndcard - 电信, ncu - 校园网
     ISP: '',
     password: ''
   },
 
-  // Available languages: en - English, zh - Simplified Chinese
-  lang: 'zh',
+  // NCUWLAN account
+  NCUWLAN: {
+    username: '',
+    password: ''
+  },
+  time: {
+    // Recommend not too low, or you'll encounter "Status Internal Server Error" and have to use dirty alternative check
+    checkInterval: 5000,
 
-  // Recommend not too low, or you'll encounter "Status Internal Server Error" and have to use dirty alternative check
-  checkInterval: 5000,
-
-  // Recommend >= 10s (NCUWLAN needs a 10s break between two logins)
-  retryTimeout: 10000
+    // Recommend >= 10s (NCUWLAN needs a 10s break between two login)
+    retryTimeout: 10000
+  },
+  log: {
+    info: 'white',
+    processing: 'blue',
+    success: 'green',
+    error: 'red'
+  }
 }
 
 const msg =
@@ -24,7 +38,7 @@ const msg =
         NCUWLAN: '当前网络为 NCUWLAN',
         connecting: '正在连接',
         connectSuccess: '连接成功',
-        connectFailed: `连接失败！${config.retryTimeout / 1000} 秒后重试`,
+        connectFailed: `连接失败！${config.time.retryTimeout / 1000} 秒后重试`,
         connectError: '连接异常！正在重新连接',
         statusError: '连接状态服务器失败！使用备用检测方式'
       }
@@ -33,15 +47,15 @@ const msg =
         NCUWLAN: 'Current network is NCUWLAN',
         connecting: 'Connecting',
         connectSuccess: 'Connect success',
-        connectFailed: `Connect failed! Retry in ${config.retryTimeout /
+        connectFailed: `Connect failed! Retry in ${config.time.retryTimeout /
           1000} sec(s)`,
         connectError: 'Connect error! Reconnecting',
         statusError: 'Status server error! Use alternative check method'
       }
 
-const chalk = require('chalk')
+const chalk = require('chalk/types')
 const cheerio = require('cheerio')
-const got = require('got')
+const got = require('got/source')
 
 // Use jshashes from the authentication page, because its Base64 encryption method is different from the original module
 const Hashes = require('./lib/hashes.min')
@@ -54,6 +68,7 @@ let timer = null
 const callback = 'callbackFn'
 const callbackFn = data => data
 
+// TODO: Find a method to determine network which is available both offline & online
 const net = async () => {
   const res = await got(img)
 
@@ -73,7 +88,7 @@ const log = (color, msg) => {
 
 ;(async () => {
   if ((await net()) === 'NCUXG') {
-    log('white', msg.NCUXG)
+    log(config.log.info, msg.NCUXG)
 
     const $ = cheerio.load((await got('http://222.204.3.154/')).body)
     const ip = $('[name="user_ip"]').val()
@@ -82,11 +97,11 @@ const log = (color, msg) => {
     const n = 200
     const type = 1
 
-    const username = `${config.NCUXG.studentNo}@${config.NCUXG.ISP}`
+    const username = `${config.NCUXG.username}@${config.NCUXG.ISP}`
     const password = config.NCUXG.password
 
     const connect = async () => {
-      log('blue', msg.connecting)
+      log(config.log.processing, msg.connecting)
 
       const token = eval(
         (await got('http://222.204.3.154/cgi-bin/get_challenge', {
@@ -122,13 +137,13 @@ const log = (color, msg) => {
 
       // E2620: Already connected
       if (res.res === 'ok' || res.ecode === 'E2620') {
-        log('green', msg.connectSuccess)
+        log(config.log.success, msg.connectSuccess)
 
-        timer = setInterval(check, config.checkInterval)
+        timer = setInterval(check, config.time.checkInterval)
       } else {
-        log('red', msg.connectFailed)
+        log(config.log.error, msg.connectFailed)
 
-        timer = setTimeout(connect, config.retryTimeout)
+        timer = setTimeout(connect, config.time.retryTimeout)
       }
     }
 
@@ -139,16 +154,16 @@ const log = (color, msg) => {
             'http://222.204.3.154/cgi-bin/rad_user_info'
           )).body.includes('not_online_error')
         ) {
-          log('red', msg.connectError)
+          log(config.log.error, msg.connectError)
 
           clearInterval(timer)
           connect()
         }
       } catch {
-        log('red', msg.statusError)
+        log(config.log.error, msg.statusError)
 
         clearInterval(timer)
-        timer = setInterval(alternativeCheck, config.checkInterval)
+        timer = setInterval(alternativeCheck, config.time.checkInterval)
       }
     }
 
@@ -156,7 +171,7 @@ const log = (color, msg) => {
       try {
         await got(`${img}?${Math.random()}`)
       } catch {
-        log('red', msg.connectError)
+        log(config.log.error, msg.connectError)
 
         clearInterval(timer)
         connect()
@@ -164,6 +179,8 @@ const log = (color, msg) => {
     }
 
     connect()
-  } else if ((await net()) === 'NCUWLAN') log('white', msg.NCUWLAN)
-  else log('white', 'Connected')
+  } else if ((await net()) === 'NCUWLAN') log(config.log.info, msg.NCUWLAN)
+
+  // TODO: Finish connected check
+  else log(config.log.info, 'Connected')
 })()
