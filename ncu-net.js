@@ -53,9 +53,9 @@ const msg =
         statusError: 'Status server error! Use alternative check method'
       }
 
-const chalk = require('chalk/types')
+const chalk = require('chalk')
 const cheerio = require('cheerio')
-const got = require('got/source')
+const got = require('got')
 
 // Use jshashes from the authentication page, because its Base64 encryption method is different from the original module
 const Hashes = require('./lib/hashes.min')
