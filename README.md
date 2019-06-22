@@ -6,7 +6,12 @@
 
 NCU Net is a client for NCU Campus Network Access Authentication System. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
 
-There is an [user script version](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net) as well.
+## Install
+
+- npm: `npm i -g ncu-net`
+- Yarn: `yarn global add ncu-net`
+
+> There is an [user script version](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net) as well.
 
 ## Features
 
