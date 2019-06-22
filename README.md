@@ -1,10 +1,47 @@
-# 📶 NCU Net [![](https://img.shields.io/badge/Node.js-blue.svg)](https://github.com/kidonng/cherry#user-content-ncu-net-)
+# 📶 NCU Net
 
-**WORK IN PROGRESS**
+[![npm](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
+![npm](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
+[![GitHub](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](./LICENSE)
+
+NCU Net is a client for NCU Campus Network Access Authentication System. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
+
+There is an [user script version](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net) as well.
+
+## Features
+
+- No more manual authentication
+- Auto detect access point type
+- Auto reconnect
+- Friendly messages
 
 ## Usage
 
-1. Setup `yarn`
-2. Install a process manager (e.g. pm2 `yarn global add pm2`)
-3. [Config username, password & more](ncu-net.js#L1-32).
-4. Start a daemon (e.g. `pm2 start ncu-net.js`)
+If no option is provided, NCU Net will make a connection.
+
+```
+> ncu-net -h
+Usage: index [options]
+
+Options:
+  -x, --ncuxg <account>    Config NCU-5G/NCU-2.4G account
+  -w, --ncuwlan <account>  Config NCUWLAN account
+  -t, --timing <config>    Config check interval & retry timeout
+  -c, --config [file]      View config or load config from provided JSON file
+  -V, --version            output the version number
+  -h, --help               output usage information
+```
+
+**Notes:**
+
+- Parameters are splited by commas (`,`) and should be provided in order.
+- NCU-5G/NCU-2.4G account contains **username**, **ISP** (`cmcc`, `unicom`, `ndcard` or `ncu`) and **password**.
+- NCUWLAN account contains **username** and **password**.
+- Timing config contains **check interval** and **retry timeout** (in milliseconds).
+
+You can also setup a daemon via a process manager (e.g. pm2).
+
+## Development
+
+- Setup `yarn`
+- Run `node index`
