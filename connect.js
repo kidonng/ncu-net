@@ -13,7 +13,7 @@ const log = msg => {
   const now = new Date()
   if (msg instanceof Error)
     console.log(
-      `${now.toLocaleDateString()} ${new Date().toLocaleTimeString()} Additional error info:`
+      `${now.toLocaleDateString()} ${new Date().toLocaleTimeString()} Error info:`
     )
   console.log(
     `${now.toLocaleDateString()} ${new Date().toLocaleTimeString()} ${msg}`
@@ -26,12 +26,12 @@ const callbackFn = data => data
 let isFirstConnect = true
 
 const checkConnection = async () => {
-  if ((await ping.promise.probe('www.baidu.com')).alive) {
+  if ((await ping.promise.probe('wx4.sinaimg.cn')).alive) {
     if (isFirstConnect) {
       isFirstConnect = false
 
       log(
-        `You are already connected. Check connection every ${timing.checkInterval /
+        `You are already connected. Checking connection every ${timing.checkInterval /
           1000}s.`
       )
     }
@@ -39,11 +39,11 @@ const checkConnection = async () => {
     setTimeout(checkConnection, timing.checkInterval)
   } else {
     if (isFirstConnect) {
-      log('You are not connected. Connecting...')
+      log('You are not connected. Detecting access point...')
       detectAP()
     } else {
       log(
-        `You have lost your connection. Reconnect in ${timing.retryTimeout /
+        `You seem to be offline. Redetect access point in ${timing.retryTimeout /
           1000}s.`
       )
       setTimeout(detectAP, timing.retryTimeout)
@@ -56,15 +56,21 @@ const detectAP = async () => {
 
   try {
     // Follow redirect
-    const body = (await got('http://www.baidu.com/')).body
+    const body = (await got(
+      'http://wx4.sinaimg.cn/large/0060lm7Tly1fz2yx9quplj300100107g'
+    )).body
 
     if (body.includes('222.204.3.221')) connectNCUWLAN()
     else if (body.includes('222.204.3.156')) connectNCUXG()
-    else checkConnection()
+    else {
+      isFirstConnect = true
+
+      log('Access point unknown. Rechecking connection...')
+      checkConnection()
+    }
   } catch (e) {
     log(
-      `Failed to detect access point type, retry in ${timing.retryTimeout /
-        1000}s.`
+      `Failed to detect access point, retry in ${timing.retryTimeout / 1000}s.`
     )
     log(e)
     setTimeout(detectAP, timing.retryTimeout)
@@ -72,7 +78,7 @@ const detectAP = async () => {
 }
 
 const connectNCUWLAN = async () => {
-  log('Current access point is NCUWLAN.')
+  log('Access point is NCUWLAN. Connecting...')
 
   const ac_id = (await got('http://222.204.3.221')).url.match(
     /\/index_([\d]+).html/
@@ -80,7 +86,7 @@ const connectNCUWLAN = async () => {
   const ajax = 1
 
   if (!(ncuwlan.username && ncuwlan.password))
-    throw new Error('You have not config NCUWLAN account yet.')
+    throw new Error('NCUWLAN account has not been set yet.')
   const username = ncuwlan.username
   const password = ncuwlan.password
 
@@ -104,11 +110,11 @@ const connectNCUWLAN = async () => {
         log('Successfully connected.')
         setTimeout(checkConnection, timing.checkInterval)
       } else {
-        log(`Failed to connect, retry in ${timing.retryTimeout / 1000}s.`)
+        log(`Failed to connect. Retry in ${timing.retryTimeout / 1000}s.`)
         setTimeout(connect, timing.retryTimeout)
       }
     } catch (e) {
-      log(`Failed to connect, retry in ${timing.retryTimeout / 1000}s.`)
+      log(`Failed to connect. Retry in ${timing.retryTimeout / 1000}s.`)
       log(e)
       setTimeout(connect, timing.retryTimeout)
     }
@@ -118,7 +124,7 @@ const connectNCUWLAN = async () => {
 }
 
 const connectNCUXG = async () => {
-  log('Current access point is NCU-5G/NCU-2.4G.')
+  log('Access point is NCU-5G/NCU-2.4G. Connecting...')
 
   const $ = cheerio.load((await got('http://222.204.3.154/')).body)
   const ip = $('[name="user_ip"]').val()
@@ -128,7 +134,7 @@ const connectNCUXG = async () => {
   const type = 1
 
   if (!(ncuxg.username && ncuxg.isp && ncuxg.password))
-    throw new Error('You have not config NCU-5G/NCU-2.4G account yet.')
+    throw new Error('NCU-5G/NCU-2.4G account has not been set yet.')
   const username = `${ncuxg.username}@${ncuxg.isp}`
   const password = ncuxg.password
 
@@ -171,16 +177,16 @@ const connectNCUXG = async () => {
           log('Successfully connected.')
           setTimeout(checkConnection, timing.checkInterval)
         } else {
-          log(`Failed to connect, retry in ${timing.retryTimeout / 1000}s.`)
+          log(`Failed to connect. Retry in ${timing.retryTimeout / 1000}s.`)
           setTimeout(connect, timing.retryTimeout)
         }
       } catch (e) {
-        log(`Failed to connect, retry in ${timing.retryTimeout / 1000}s.`)
+        log(`Failed to connect. Retry in ${timing.retryTimeout / 1000}s.`)
         log(e)
         setTimeout(connect, timing.retryTimeout)
       }
     } catch (e) {
-      log(`Failed to get token, retry in ${timing.retryTimeout / 1000}s.`)
+      log(`Failed to get token. Retry in ${timing.retryTimeout / 1000}s.`)
       log(e)
       setTimeout(connect, timing.retryTimeout)
     }

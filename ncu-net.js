@@ -40,12 +40,12 @@ if (program.ncuxg) {
     })
 
     console.log(outdent`
-      Your NCU-5G/NCU-2.4G account is:
-      Username: ${program.ncuxg[0]}
-      ISP: ${program.ncuxg[1]}
-      Password: ${program.ncuxg[2]}
+      NCU-5G/NCU-2.4G account:
+      - Username: ${program.ncuxg[0]}
+      - ISP: ${program.ncuxg[1]}
+      - Password: ${program.ncuxg[2]}
     `)
-  } else console.log('Please provide a valid NCU-5G/NCU-2.4G account!')
+  } else console.log('Please provide valid NCU-5G/NCU-2.4G account info.')
 } else if (program.ncuwlan) {
   if (program.ncuwlan.length === 2) {
     config.set({
@@ -56,11 +56,11 @@ if (program.ncuxg) {
     })
 
     console.log(outdent`
-      Your NCUWLAN account is:
-      Username: ${program.ncuwlan[0]}
-      Password: ${program.ncuwlan[1]}
+      NCUWLAN account:
+      - Username: ${program.ncuwlan[0]}
+      - Password: ${program.ncuwlan[1]}
     `)
-  } else console.log('Please provide a valid NCUWLAN account!')
+  } else console.log('Please provide valid NCUWLAN account info.')
 } else if (program.timing) {
   if (program.timing.length === 2) {
     config.set({
@@ -71,11 +71,11 @@ if (program.ncuxg) {
     })
 
     console.log(outdent`
-      Your timing config is:
-      Check connection: every ${program.timing[0] / 1000}s
-      Retry: in ${program.timing[1] / 1000}s
+      Timing config:
+      - Check connection: every ${program.timing[0] / 1000}s
+      - Retry: in ${program.timing[1] / 1000}s
     `)
-  } else console.log('Please provide a valid timing config!')
+  } else console.log('Please provide valid timing config.')
 } else if (program.config) {
   if (program.config === true) {
     console.log(config.path)
@@ -86,7 +86,7 @@ if (program.ncuxg) {
         config.store = await loadJsonFile(program.config)
         console.log('Successfully loaded config file.')
       } catch (e) {
-        console.log('Failed to load config file.\nAdditional error info:')
+        console.log('Failed to load config file.\nError info:')
         console.log(e)
       }
     })()
