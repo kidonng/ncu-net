@@ -8,7 +8,7 @@ const Hashes = require('./lib/hashes.min')
 const xEncode = require('./lib/xEncode')
 const base64encode = require('./lib/base64')
 
-const { ncuxg, ncuwlan, timing } = new Conf().store
+const { ncuxg, ncuwlan, timing } = new Conf({ projectName: 'ncu-net' }).store
 const log = msg => {
   const now = new Date()
   if (msg instanceof Error)
