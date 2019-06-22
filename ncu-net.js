@@ -10,13 +10,7 @@ const connect = require('./connect')
 
 const config = new Conf({
   projectName: 'ncu-net',
-  defaults: {
-    timing: {
-      checkInterval: 3000,
-      // Recommend >= 10s (NCUWLAN needs a 10s break between two login)
-      retryTimeout: 10000
-    }
-  }
+  defaults: { timing: { checkInterval: 3000, retryTimeout: 10000 } }
 })
 const split = value => value.split(',')
 
@@ -40,7 +34,6 @@ if (program.ncuxg) {
     config.set({
       ncuxg: {
         username: program.ncuxg[0],
-        // cmcc - 移动 / unicom - 联通 / ndcard - 电信 / ncu / 校园网
         isp: program.ncuxg[1],
         password: program.ncuxg[2]
       }
@@ -93,6 +86,7 @@ if (program.ncuxg) {
         config.store = await loadJsonFile(program.config)
         console.log('Successfully loaded config file.')
       } catch (e) {
+        console.log('Failed to load config file.\nAdditional error info:')
         console.log(e)
       }
     })()

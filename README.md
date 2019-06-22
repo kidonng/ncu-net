@@ -38,6 +38,7 @@ Options:
 - NCU-5G/NCU-2.4G account contains **username**, **ISP** (`cmcc`, `unicom`, `ndcard` or `ncu`) and **password**.
 - NCUWLAN account contains **username** and **password**.
 - Timing config contains **check interval** and **retry timeout** (in milliseconds).
+  - We recommend setting retry timeout to set no less than 10s because NCUWLAN needs a 10s break between two logins.
 
 You can also setup a daemon via a process manager (e.g. pm2).
 
