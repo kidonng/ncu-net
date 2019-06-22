@@ -10,6 +10,7 @@ NCU Net is a client for NCU Campus Network Access Authentication System. Support
 
 - npm: `npm i -g ncu-net`
 - Yarn: `yarn global add ncu-net`
+- Packaged version for Windows, Linux & macOS in [releases](../../releases)
 
 > There is an [user script version](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net) as well.
 
