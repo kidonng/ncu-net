@@ -9,6 +9,7 @@ const pkginfo = require('pkginfo')(module)
 const connect = require('./connect')
 
 const config = new Conf({
+  projectName: 'ncu-net',
   defaults: {
     timing: {
       checkInterval: 3000,
