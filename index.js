@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Conf = require('conf')
 const program = require('commander')
 const outdent = require('outdent')
