@@ -1,11 +1,11 @@
 {
   "name": "ncu-net",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "NCU Campus Network Access Authentication System Client",
   "author": "kidonng",
   "homepage": "https://github.com/kidonng/ncu-net#readme",
   "license": "MIT",
-  "bin": "index.js",
+  "bin": "ncu-net.js",
   "files": [
     "*.js",
     "lib"

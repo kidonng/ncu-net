@@ -21,7 +21,7 @@ If no option is provided, NCU Net will make a connection.
 
 ```
 > ncu-net -h
-Usage: index [options]
+Usage: ncu-net [options]
 
 Options:
   -x, --ncuxg <account>    Config NCU-5G/NCU-2.4G account
