@@ -19,7 +19,7 @@ NCU Net is a client for NCU Campus Network Access Authentication System. Support
 - No more manual authentication
 - Auto detect access point type
 - Auto reconnect
-- Concise messages & logs
+- Concise & colorful messages and logs
 
 ## Usage
 

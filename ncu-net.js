@@ -5,6 +5,7 @@ const program = require('commander')
 const outdent = require('outdent')
 const loadJsonFile = require('load-json-file')
 const pkginfo = require('pkginfo')(module)
+const chalk = require('chalk')
 
 const connect = require('./connect')
 
@@ -40,12 +41,13 @@ if (program.ncuxg) {
     })
 
     console.log(outdent`
-      NCU-5G/NCU-2.4G account:
-      - Username: ${program.ncuxg[0]}
-      - ISP: ${program.ncuxg[1]}
-      - Password: ${program.ncuxg[2]}
+      ${chalk.blue('NCU-5G/NCU-2.4G account:')}
+      - ${chalk.bold('Username:')} ${program.ncuxg[0]}
+      - ${chalk.bold('ISP:')} ${program.ncuxg[1]}
+      - ${chalk.bold('Password:')} ${program.ncuxg[2]}
     `)
-  } else console.log('Please provide valid NCU-5G/NCU-2.4G account info.')
+  } else
+    console.log(chalk.red('Please provide valid NCU-5G/NCU-2.4G account info.'))
 } else if (program.ncuwlan) {
   if (program.ncuwlan.length === 2) {
     config.set({
@@ -56,11 +58,11 @@ if (program.ncuxg) {
     })
 
     console.log(outdent`
-      NCUWLAN account:
-      - Username: ${program.ncuwlan[0]}
-      - Password: ${program.ncuwlan[1]}
+      ${chalk.blue('NCUWLAN account:')}
+      - ${chalk.bold('Username:')} ${program.ncuwlan[0]}
+      - ${chalk.bold('Password:')} ${program.ncuwlan[1]}
     `)
-  } else console.log('Please provide valid NCUWLAN account info.')
+  } else console.log(chalk.red('Please provide valid NCUWLAN account info.'))
 } else if (program.timing) {
   if (program.timing.length === 2) {
     config.set({
@@ -71,23 +73,47 @@ if (program.ncuxg) {
     })
 
     console.log(outdent`
-      Timing config:
-      - Check connection: every ${program.timing[0] / 1000}s
-      - Retry: in ${program.timing[1] / 1000}s
+      ${chalk.blue('Timing config:')}
+      - ${chalk.bold('Check connection:')} every ${program.timing[0] / 1000} s
+      - ${chalk.bold('Retry:')} in ${program.timing[1] / 1000} s
     `)
-  } else console.log('Please provide valid timing config.')
+  } else console.log(chalk.red('Please provide valid timing config.'))
 } else if (program.config) {
   if (program.config === true) {
-    console.log(config.path)
-    console.log(config.store)
+    const { ncuxg, ncuwlan, timing } = config.store
+
+    console.log(`${chalk.blue('Config file path:')} ${config.path}`)
+
+    if (ncuxg)
+      console.log(outdent`
+      ${chalk.blue('NCU-5G/NCU-2.4G account:')}
+      - ${chalk.bold('Username:')} ${ncuxg.username}
+      - ${chalk.bold('ISP:')} ${ncuxg.isp}
+      - ${chalk.bold('Password:')} ${ncuxg.password}
+    `)
+
+    if (ncuwlan)
+      console.log(outdent`
+      ${chalk.blue('NCUWLAN account:')}
+      - ${chalk.bold('Username:')} ${ncuwlan.username}
+      - ${chalk.bold('Password:')} ${ncuwlan.password}
+    `)
+
+    if (timing)
+      console.log(outdent`
+      ${chalk.blue('Timing config:')}
+      - ${chalk.bold('Check connection:')} every ${timing.checkInterval /
+        1000} s
+      - ${chalk.bold('Retry:')} in ${timing.retryTimeout / 1000} s
+    `)
   } else
     (async () => {
       try {
         config.store = await loadJsonFile(program.config)
-        console.log('Successfully loaded config file.')
+        console.log(chalk.green('Successfully loaded config file.'))
       } catch (e) {
-        console.log('Failed to load config file.\nError info:')
-        console.log(e)
+        console.log(chalk.red('Failed to load config file.'))
+        console.log(chalk.red(e))
       }
     })()
 } else connect()
