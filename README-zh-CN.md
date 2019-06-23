@@ -18,7 +18,7 @@ NCU Net 是**南昌大学校园网络接入认证系统**的一个客户端。�
 - Yarn: `yarn global add ncu-net`
 - Windows、Linux 和 macOS 的软件包: [Releases](../../releases)
 
-> 同时也有[用户脚本版](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net)。
+> 同时也有[用户脚本版](https://github.com/kidonng/cherry/blob/master/scripts/README-zh-CN.md#ncu-net)。
 
 ## 特点
 
