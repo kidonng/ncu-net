@@ -1,8 +1,12 @@
-# 📶 NCU Net
+<h1 align="center">📶 NCU Net</h1>
 
-[![npm](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
-![npm](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
-[![GitHub](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](./LICENSE)
+<div align="center">
+  
+  [![npm](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
+  ![npm](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
+  [![GitHub](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](./LICENSE)
+  
+</div>
 
 NCU Net is a client for NCU Campus Network Access Authentication System. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
 
