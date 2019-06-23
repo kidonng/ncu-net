@@ -3,14 +3,17 @@ language: node_js
 node_js: node
 cache: yarn
 
+if: tag IS present
+
 install: yarn add pkg
 script: pkg .
 
 deploy:
-  provider: releases
-  api_key: $token
-  file_glob: true
-  file: ./ncu-net-*
-  skip_cleanup: true
-  on:
-    tags: true
+  - provider: releases
+    api_key: $token
+    file_glob: true
+    file: ./ncu-net-*
+    skip_cleanup: true
+  - provider: npm
+    email: kidonng@gmail.com
+    api_key: $npm_token
