@@ -26,7 +26,7 @@ const callbackFn = data => data
 let isFirstConnect = true
 
 const checkConnection = async () => {
-  if ((await ping.promise.probe('www.baidu.com')).alive) {
+  if ((await ping.promise.probe(`wx${Math.ceil(Math.random() * 4)}.sinaimg.cn`)).alive) {
     if (isFirstConnect) {
       isFirstConnect = false
 
@@ -61,7 +61,7 @@ const detectAP = async () => {
   try {
     // Follow redirect
     const body = (await got(
-      `http://wx${Math.ceil(Math.random() * 4)}.sinaimg.cn/large/0060lm7Tly1fz2yx9quplj300100107g`
+      `http://wx${Math.ceil(Math.random() * 4)}.sinaimg.cn/large/005BYqpggy1g4bzsci0gsj300100101v.jpg`
     )).body
 
     if (body.includes('222.204.3.221')) connectNCUWLAN()
