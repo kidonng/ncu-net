@@ -61,7 +61,7 @@ const detectAP = async () => {
   try {
     // Follow redirect
     const body = (await got(
-      'http://wx4.sinaimg.cn/large/0060lm7Tly1fz2yx9quplj300100107g'
+      `http://wx${Math.ceil(Math.random() * 4)}.sinaimg.cn/large/0060lm7Tly1fz2yx9quplj300100107g`
     )).body
 
     if (body.includes('222.204.3.221')) connectNCUWLAN()
