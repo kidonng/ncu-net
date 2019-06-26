@@ -1,18 +1,18 @@
-dist: xenial
+dist: bionic
 language: node_js
-node_js: node
+node_js: lts/*
 cache: yarn
 
 if: tag IS present
 
 install: yarn add pkg
-script: pkg .
+script: yarn build
 
 deploy:
   - provider: releases
     api_key: $token
     file_glob: true
-    file: ./ncu-net-*
+    file: build/*
     skip_cleanup: true
     on:
       tags: true

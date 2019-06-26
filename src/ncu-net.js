@@ -3,8 +3,7 @@
 const Conf = require('conf')
 const program = require('commander')
 const outdent = require('outdent')
-const loadJsonFile = require('load-json-file')
-const pkginfo = require('pkginfo')(module)
+const package = require('../package.json')
 const chalk = require('chalk')
 
 const connect = require('./connect')
@@ -27,7 +26,7 @@ program
     '-c, --config [file]',
     'View config or load config from provided JSON file'
   )
-  .version(module.exports.version)
+  .version(package.version)
   .parse(process.argv)
 
 if (program.ncuxg) {
@@ -35,16 +34,14 @@ if (program.ncuxg) {
     config.set({
       ncuxg: {
         username: program.ncuxg[0],
-        isp: program.ncuxg[1],
-        password: program.ncuxg[2]
+        password: program.ncuxg[1]
       }
     })
 
     console.log(outdent`
       ${chalk.blue('NCU-5G/NCU-2.4G account:')}
       - ${chalk.bold('Username:')} ${program.ncuxg[0]}
-      - ${chalk.bold('ISP:')} ${program.ncuxg[1]}
-      - ${chalk.bold('Password:')} ${program.ncuxg[2]}
+      - ${chalk.bold('Password:')} ${program.ncuxg[1]}
     `)
   } else
     console.log(chalk.red('Please provide valid NCU-5G/NCU-2.4G account info.'))
@@ -88,7 +85,6 @@ if (program.ncuxg) {
       console.log(outdent`
       ${chalk.blue('NCU-5G/NCU-2.4G account:')}
       - ${chalk.bold('Username:')} ${ncuxg.username}
-      - ${chalk.bold('ISP:')} ${ncuxg.isp}
       - ${chalk.bold('Password:')} ${ncuxg.password}
     `)
 
@@ -107,13 +103,11 @@ if (program.ncuxg) {
       - ${chalk.bold('Retry:')} in ${timing.retryTimeout / 1000} s
     `)
   } else
-    (async () => {
-      try {
-        config.store = await loadJsonFile(program.config)
-        console.log(chalk.green('Successfully loaded config file.'))
-      } catch (e) {
-        console.log(chalk.red('Failed to load config file.'))
-        console.log(chalk.red(e))
-      }
-    })()
+    try {
+      config.store = require(program.config)
+      console.log(chalk.green('Successfully loaded config file.'))
+    } catch (e) {
+      console.log(chalk.red('Failed to load config file.'))
+      console.log(chalk.red(e))
+    }
 } else connect()
