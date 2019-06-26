@@ -1,6 +1,6 @@
-dist: xenial
+dist: bionic
 language: node_js
-node_js: node
+node_js: lts/*
 cache: yarn
 
 if: tag IS present

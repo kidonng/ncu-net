@@ -10,7 +10,9 @@ English | [简体中文](README-zh-CN.md)
 
 </div>
 
-NCU Net is a client for _NCU Campus Network Access Authentication System_. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
+NCU Net is a command line client for _NCU Campus Network Access Authentication System_. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
+
+![](screenshots/ncu-net.png)
 
 ## Install
 
@@ -50,15 +52,15 @@ Options:
 - NCU-5G/NCU-2.4G account contains **username**, **ISP** (`cmcc`, `unicom`, `ndcard` or `ncu`) and **password**.
 - NCUWLAN account contains **username** and **password**.
 - Timing config contains **check interval** and **retry timeout** (in milliseconds).
-  - We recommend setting retry timeout to set no less than 10 seconds, because NCUWLAN needs a 10 seconds break between two logins.
+  - We recommend setting retry timeout to no less than 10 seconds, because NCUWLAN needs a 10 seconds break between two logins.
 
 You may want to set up a daemon via a process manager (e.g. [pm2](https://github.com/Unitech/pm2)).
 
 ## Development
 
 - Setup `yarn`
-- Run `node index`
+- Run `node src/ncu-net.js`
 
-## Related
+## Similar Projects
 
 - [ncuwlan](https://github.com/maoyuqing/ncuwlan)
