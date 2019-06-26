@@ -10,7 +10,9 @@ English | [简体中文](README-zh-CN.md)
 
 </div>
 
-NCU Net is a client for _NCU Campus Network Access Authentication System_. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
+NCU Net is a command line client for _NCU Campus Network Access Authentication System_. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
+
+![](screenshots/ncu-net.png)
 
 ## Install
 

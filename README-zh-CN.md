@@ -10,7 +10,9 @@
 
 </div>
 
-NCU Net 是**南昌大学校园网络接入认证系统**的一个客户端。同时支持 `NCU-5G/NCU-2.4G` 和 `NCUWLAN`。
+NCU Net 是**南昌大学校园网络接入认证系统**的一个命令行客户端。同时支持 `NCU-5G/NCU-2.4G` 和 `NCUWLAN`。
+
+![](screenshots/ncu-net.png)
 
 ## 安装
 
