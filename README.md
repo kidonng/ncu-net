@@ -61,6 +61,6 @@ You may want to set up a daemon via a process manager (e.g. [pm2](https://github
 - Setup `yarn`
 - Run `node index`
 
-## Related
+## Similar Projects
 
 - [ncuwlan](https://github.com/maoyuqing/ncuwlan)

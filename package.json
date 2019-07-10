@@ -5,9 +5,9 @@
   "author": "kidonng",
   "homepage": "https://github.com/kidonng/ncu-net#readme",
   "license": "MIT",
-  "bin": "ncu-net.js",
+  "bin": "src/ncu-net.js",
   "files": [
-    "*.js",
+    "src",
     "lib"
   ],
   "repository": {

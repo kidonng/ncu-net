@@ -5,9 +5,9 @@ const cheerio = require('cheerio')
 const chalk = require('chalk')
 
 // Use jshashes from the authentication page, because its Base64 encryption method is different from the original module
-const Hashes = require('./lib/hashes.min')
-const xEncode = require('./lib/xEncode')
-const base64encode = require('./lib/base64')
+const Hashes = require('../lib/hashes.min')
+const xEncode = require('../lib/xEncode')
+const base64encode = require('../lib/base64')
 
 const { ncuxg, ncuwlan, timing } = new Conf({ projectName: 'ncu-net' }).store
 const log = msg => {
@@ -26,7 +26,10 @@ const callbackFn = data => data
 let isFirstConnect = true
 
 const checkConnection = async () => {
-  if ((await ping.promise.probe(`wx${Math.ceil(Math.random() * 4)}.sinaimg.cn`)).alive) {
+  if (
+    (await ping.promise.probe(`wx${Math.ceil(Math.random() * 4)}.sinaimg.cn`))
+      .alive
+  ) {
     if (isFirstConnect) {
       isFirstConnect = false
 
@@ -61,7 +64,9 @@ const detectAP = async () => {
   try {
     // Follow redirect
     const body = (await got(
-      `http://wx${Math.ceil(Math.random() * 4)}.sinaimg.cn/large/005BYqpggy1g4bzsci0gsj300100101v.jpg`
+      `http://wx${Math.ceil(
+        Math.random() * 4
+      )}.sinaimg.cn/large/005BYqpggy1g4bzsci0gsj300100101v.jpg`
     )).body
 
     if (body.includes('222.204.3.221')) connectNCUWLAN()
