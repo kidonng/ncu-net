@@ -59,8 +59,8 @@ NCU Net 是**南昌大学校园网络接入认证系统**的一个命令行客�
 ## 开发
 
 - 安装依赖 `yarn`
-- 运行 `node index`
+- 运行 `node src/ncu-net.js`
 
-## 相关
+## 类似项目
 
 - [ncuwlan](https://github.com/maoyuqing/ncuwlan)

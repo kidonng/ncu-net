@@ -59,7 +59,7 @@ You may want to set up a daemon via a process manager (e.g. [pm2](https://github
 ## Development
 
 - Setup `yarn`
-- Run `node index`
+- Run `node src/ncu-net.js`
 
 ## Similar Projects
 
