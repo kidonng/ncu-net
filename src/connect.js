@@ -4,10 +4,8 @@ const got = require('got')
 const cheerio = require('cheerio')
 const chalk = require('chalk')
 
-// Use jshashes from the authentication page, because its Base64 encryption method is different from the original module
-const Hashes = require('../lib/hashes.min')
 const xEncode = require('../lib/xEncode')
-const base64encode = require('../lib/base64')
+const { base64encode, customb64, md5hmac, sha1 } = require('../lib/hashes')
 
 const { ncuxg, ncuwlan, timing } = new Conf({ projectName: 'ncu-net' }).store
 const log = msg => {
@@ -168,8 +166,8 @@ const connectNCUXG = async () => {
           query: { username, ip, callback }
         })).body
       ).challenge
-      const md5 = new Hashes.MD5().hex_hmac(token, password)
-      const info = `{SRBX1}${new Hashes.Base64().encode(
+      const md5 = md5hmac(token, password)
+      const info = `{SRBX1}${customb64(
         xEncode(
           JSON.stringify({ username, password, ip, acid: ac_id, enc_ver }),
           token
@@ -188,7 +186,7 @@ const connectNCUXG = async () => {
               n,
               type,
               info,
-              chksum: new Hashes.SHA1().hex(
+              chksum: sha1(
                 [null, username, md5, ac_id, ip, n, type, info].join(token)
               ),
               callback
