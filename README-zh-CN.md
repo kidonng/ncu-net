@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![npm](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
-![npm](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
-[![GitHub](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](./LICENSE)
+[![最新版本](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
+![npm 下载量](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
+[![协议](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](LICENSE)
 
 [English](README.md) | 简体中文
 
