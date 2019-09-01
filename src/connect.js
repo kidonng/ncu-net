@@ -77,8 +77,8 @@ const detectAP = async () => {
     // Follow redirect
     const { body } = await got(url)
 
-    if (body.includes('222.204.3.221')) connectAP('ncuwlan')
-    else if (body.includes('222.204.3.156')) connectAP('ncuxg')
+    if (body.includes(APs.ncuwlan.server)) connectAP('ncuwlan')
+    else if (body.includes(APs.ncuxg.server)) connectAP('ncuxg')
     else {
       log(
         chalk.green(

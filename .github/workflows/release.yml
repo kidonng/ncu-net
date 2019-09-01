@@ -6,8 +6,8 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
           node-version: 10
           registry-url: https://registry.npmjs.org/
@@ -19,8 +19,8 @@ jobs:
   publish-gpr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
           node-version: 10
           registry-url: https://npm.pkg.github.com/
@@ -33,14 +33,14 @@ jobs:
   publish-github-releases:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
           node-version: 10
       - run: yarn add pkg -D
       - run: yarn build
       - if: github.event.ref_type == 'tag'
-        uses: docker://softprops/action-gh-release
+        uses: softprops/action-gh-release@master
         with:
           files: build/*
         env:
