@@ -12,15 +12,13 @@ English | [简体中文](README-zh-CN.md)
 
 NCU Net is a command line client for _NCU Campus Network Access Authentication System_. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
 
-![](screenshots/ncu-net.png)
-
 ## Install
 
 - npm: `npm i -g ncu-net`
 - Yarn: `yarn global add ncu-net`
-- Packages for Windows, Linux & macOS: [Releases](../../releases)
+- [Binaries packed with Node.js for Windows, Linux & macOS](../../releases)
 
-> There is an [user script version](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net) as well.
+> We also provide an [user script](https://github.com/kidonng/cherry/tree/master/scripts#ncu-net) version.
 
 ## Features
 

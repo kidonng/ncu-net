@@ -1,36 +1,29 @@
 {
   "name": "ncu-net",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "NCU Campus Network Access Authentication System Client",
-  "bin": "src/ncu-net.js",
+  "bin": "dist/src/cli.js",
   "files": [
-    "src",
-    "lib"
+    "dist"
   ],
-  "scripts": {
-    "build": "pkg . --out-path build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kidonng/ncu-net.git"
-  },
-  "author": "kidonng",
+  "repository": "kidonng/ncu-net",
+  "author": "kidonng (https://github.com/kidonng)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kidonng/ncu-net/issues"
-  },
+  "bugs": "https://github.com/kidonng/ncu-net/issues",
   "homepage": "https://github.com/kidonng/ncu-net#readme",
   "dependencies": {
+    "arg": "^4.1.1",
     "chalk": "^2.4.2",
-    "cheerio": "1.0.0-rc.3",
-    "commander": "^2.20.0",
+    "cheerio": "^1.0.0-rc.3",
     "conf": "^5.0.0",
-    "got": "9.6.0",
-    "outdent": "^0.7.0",
-    "ping": "^0.2.2"
+    "got": "^9.6.0",
+    "outdent": "^0.7.0"
   },
   "devDependencies": {
-    "prettier": "1.18.2"
+    "@types/cheerio": "^0.22.13",
+    "@types/got": "^9.6.7",
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.2"
   },
   "prettier": {
     "semi": false,

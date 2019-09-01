@@ -11,6 +11,8 @@ jobs:
         with:
           node-version: 10
           registry-url: https://registry.npmjs.org/
+      - run: yarn
+      - run: yarn tsc
       - if: github.event.ref_type == 'tag'
         run: npm publish
         env:
@@ -24,7 +26,9 @@ jobs:
         with:
           node-version: 10
           registry-url: https://npm.pkg.github.com/
-      - run: sed 's/"name":\ "/"name":\ "@kidonng\//' package.json
+      - run: yarn
+      - run: yarn tsc
+      - run: sed -i 's/"name":\ "/"name":\ "@kidonng\//' package.json
       - if: github.event.ref_type == 'tag'
         run: npm publish
         env:
@@ -37,8 +41,10 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 10
-      - run: yarn add pkg -D
-      - run: yarn build
+      - run: yarn
+      - run: yarn tsc
+      - run: yarn global add pkg
+      - run: pkg dist/src/cli.js --out-path build
       - if: github.event.ref_type == 'tag'
         uses: docker://softprops/action-gh-release
         with:

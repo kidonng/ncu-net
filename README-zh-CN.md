@@ -12,15 +12,13 @@
 
 NCU Net 是**南昌大学校园网络接入认证系统**的一个命令行客户端。同时支持 `NCU-5G/NCU-2.4G` 和 `NCUWLAN`。
 
-![](screenshots/ncu-net.png)
-
 ## 安装
 
 - npm: `npm i -g ncu-net`
 - Yarn: `yarn global add ncu-net`
-- Windows、Linux 和 macOS 的软件包: [Releases](../../releases)
+- [打包了 Node.js 的 Windows、Linux 和 macOS 程序](../../releases)
 
-> 同时也有[用户脚本版](https://github.com/kidonng/cherry/blob/master/scripts/README-zh-CN.md#ncu-net)。
+> 我们同时提供[用户脚本](https://github.com/kidonng/cherry/blob/master/scripts/README-zh-CN.md#ncu-net)版本。
 
 ## 特点
 
