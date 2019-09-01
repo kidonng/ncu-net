@@ -30,7 +30,7 @@ program
   .parse(process.argv)
 
 if (program.ncuxg) {
-  if (program.ncuxg.length === 3) {
+  if (program.ncuxg.length === 2) {
     config.set({
       ncuxg: {
         username: program.ncuxg[0],

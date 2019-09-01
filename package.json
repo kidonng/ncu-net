@@ -1,6 +1,6 @@
 {
   "name": "ncu-net",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "NCU Campus Network Access Authentication System Client",
   "bin": "src/ncu-net.js",
   "files": [
