@@ -1,5 +1,5 @@
 import { createHmac, createHash } from 'crypto'
-import { encode } from '../lib/jquery-base64'
+import { encode as base64 } from '../lib/jquery-base64'
 import { xEncode } from '../lib/xEncode'
 
 const md5 = (str: string, key: string) =>
@@ -12,4 +12,4 @@ const sha1 = (str: string) =>
     .update(str)
     .digest('hex')
 
-export { md5, sha1, encode as base64, xEncode }
+export { md5, sha1, base64, xEncode }

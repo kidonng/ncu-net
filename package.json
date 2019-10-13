@@ -1,29 +1,29 @@
 {
   "name": "ncu-net",
   "version": "0.3.0",
-  "description": "NCU Campus Network Access Authentication System Client",
+  "description": "A campus network client for Nanchang University",
+  "license": "MIT",
+  "repository": "kidonng/ncu-net",
+  "author": "Kid (https://github.com/kidonng)",
   "bin": "dist/src/cli.js",
   "files": [
     "dist"
   ],
-  "repository": "kidonng/ncu-net",
-  "author": "kidonng (https://github.com/kidonng)",
-  "license": "MIT",
-  "bugs": "https://github.com/kidonng/ncu-net/issues",
-  "homepage": "https://github.com/kidonng/ncu-net#readme",
   "dependencies": {
     "arg": "^4.1.1",
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
-    "conf": "^5.0.0",
+    "conf": "^6.1.0",
     "got": "^9.6.0",
-    "outdent": "^0.7.0"
+    "outdent": "^0.7.0",
+    "p-retry": "^4.1.0",
+    "sleep-promise": "^8.0.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.13",
     "@types/got": "^9.6.7",
     "prettier": "^1.18.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.3"
   },
   "prettier": {
     "semi": false,

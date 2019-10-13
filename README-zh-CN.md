@@ -1,14 +1,12 @@
-<h1 align="center">📶 NCU Net</h1>
+# 📶 NCU Net
 
-<div align="center">
-
-[![最新版本](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
-![npm 下载量](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
-[![协议](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](LICENSE)
+[![最新版本](https://img.shields.io/npm/v/ncu-net.svg)](https://npm.im/ncu-net)
+![npm 下载量](https://img.shields.io/npm/dt/ncu-net.svg)
+[![协议](https://img.shields.io/github/license/kidonng/ncu-net.svg)](LICENSE)
 
 [English](README.md) | 简体中文
 
-</div>
+---
 
 NCU Net 是**南昌大学校园网络接入认证系统**的一个命令行客户端。同时支持 `NCU-5G/NCU-2.4G` 和 `NCUWLAN`。
 
@@ -53,11 +51,6 @@ NCU Net 是**南昌大学校园网络接入认证系统**的一个命令行客�
   - 推荐将重试延时设为不小于 10 秒，因为 NCUWLAN 要求两次登录间有 10 秒间隔。
 
 你也可以通过进程管理器设置一个守护进程 (例如 [pm2](https://github.com/Unitech/pm2))。
-
-## 开发
-
-- 安装依赖 `yarn`
-- 运行 `node src/ncu-net.js`
 
 ## 类似项目
 

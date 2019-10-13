@@ -1,2 +1,2 @@
-export function decode(s: string): string
-export function encode(s: string): string
+export function decode(str: string): string
+export function encode(str: string): string

@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    // Node.js 10
+    "target": "es2018",
     "module": "commonjs",
     "strict": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noEmitOnError": true,
+    // "noEmitOnError": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "esModuleInterop": true,

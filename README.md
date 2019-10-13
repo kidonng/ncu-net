@@ -1,14 +1,12 @@
-<h1 align="center">📶 NCU Net</h1>
+# 📶 NCU Net
 
-<div align="center">
-
-[![Latest version](https://img.shields.io/npm/v/ncu-net.svg?style=for-the-badge)](https://npm.im/ncu-net)
-![npm downloads](https://img.shields.io/npm/dt/ncu-net.svg?style=for-the-badge)
-[![License](https://img.shields.io/github/license/kidonng/ncu-net.svg?style=for-the-badge)](LICENSE)
+[![Latest version](https://img.shields.io/npm/v/ncu-net.svg)](https://npm.im/ncu-net)
+![npm downloads](https://img.shields.io/npm/dt/ncu-net.svg)
+[![License](https://img.shields.io/github/license/kidonng/ncu-net.svg)](LICENSE)
 
 English | [简体中文](README-zh-CN.md)
 
-</div>
+---
 
 NCU Net is a command line client for _NCU Campus Network Access Authentication System_. Supports both `NCU-5G/NCU-2.4G` and `NCUWLAN`.
 
@@ -53,11 +51,6 @@ Options:
   - We recommend setting retry timeout to no less than 10 seconds, because NCUWLAN needs a 10 seconds break between two logins.
 
 You can also set up a daemon via a process manager (e.g. [pm2](https://github.com/Unitech/pm2)).
-
-## Development
-
-- Setup `yarn`
-- Run `node src/ncu-net.js`
 
 ## Similar Projects
 

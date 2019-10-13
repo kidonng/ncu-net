@@ -1,6 +1,8 @@
 name: Publish
 
-on: create
+on:
+  release:
+    types: created
 
 jobs:
   publish-npm:
@@ -13,8 +15,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: yarn
       - run: yarn tsc
-      - if: github.event.ref_type == 'tag'
-        run: npm publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
 
@@ -28,9 +29,9 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - run: yarn
       - run: yarn tsc
+      # Prepend scope to package name
       - run: sed -i 's/"name":\ "/"name":\ "@kidonng\//' package.json
-      - if: github.event.ref_type == 'tag'
-        run: npm publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -45,8 +46,7 @@ jobs:
       - run: yarn tsc
       - run: yarn global add pkg
       - run: pkg dist/src/cli.js --out-path build
-      - if: github.event.ref_type == 'tag'
-        uses: docker://softprops/action-gh-release
+      - uses: docker://softprops/action-gh-release
         with:
           files: build/*
         env:

@@ -1,27 +1,27 @@
 import got from 'got'
 import chalk from 'chalk'
+import sleep from 'sleep-promise'
 import { load } from 'cheerio'
 import {
   config,
   log,
+  retry,
   jsonp,
   md5,
   sha1,
   base64,
   xEncode,
-  AP,
-  Account,
-  NCUXGAccount
+  AP
 } from '../utils'
 
 const connect = async () => {
-  if (!config.has('ncuxg') && !config.has('ncuwlan'))
-    return new Error(`Please set at least one account`)
+  if (config.has('ncuxg') || config.has('ncuwlan')) {
+    const { ap, connected } = await retry(detectAP)
 
-  const { ap, connected } = await detectAP()
-
-  if (config.has(ap)) return connected ? checkConnect(ap) : await connectAP(ap)
-  else return new Error(`${AP[ap].name} account not set`)
+    if (config.has(ap))
+      connected ? checkConnection(ap) : retry(() => connectAP(ap))
+    else log(Error(`${AP[ap].name} account not set`))
+  } else log(Error('Please set at least one account'))
 }
 
 const detectAP = async () => {
@@ -55,7 +55,7 @@ const connectAP = async (ap: keyof typeof AP) => {
   log(`Connecting ${name}`, true)
 
   // `NCUXGAccount` type is used for destructing `isp`
-  let { username, password, isp } = config.get(ap) as NCUXGAccount
+  let { username, password, isp } = config.get(ap)
   if (isp) username += `@${isp}`
 
   // Get client info
@@ -108,30 +108,28 @@ const connectAP = async (ap: keyof typeof AP) => {
     error_msg: string
   }
 
-  if (error === 'ok') return checkConnect(ap)
+  if (error === 'ok') return checkConnection(ap)
   else {
-    setTimeout(connectAP, config.get('retry') as number, ap)
-    return new Error(ploy_msg || error_msg)
+    await sleep(config.get('retry'))
+
+    connectAP(ap)
+
+    log(Error(ploy_msg || error_msg))
   }
 }
 
-const checkConnect = (ap: keyof typeof AP) => {
-  const timer = setInterval(
-    async () => {
-      if (!(await getStatus(ap))) {
-        clearInterval(timer)
-        log(await connect(), true)
-      }
-    },
-    config.get('check') as number
-  )
+const checkConnection = async (ap: keyof typeof AP) => {
+  log(chalk.green(`Connected to ${AP[ap].name}`))
 
-  return chalk.green(`Connected to ${AP[ap].name}`)
+  await sleep(config.get('check'))
+
+  if (await retry(() => getStatus(ap))) checkConnection(ap)
+  else await connect()
 }
 
 const getStatus = async (ap: keyof typeof AP) => {
   const { origin } = AP[ap]
-  const { username } = config.get(ap) as Account
+  const { username } = config.get(ap)
 
   const { body } = await got(`${origin}/cgi-bin/rad_user_info`)
   const [currentUser] = body.split(',')
